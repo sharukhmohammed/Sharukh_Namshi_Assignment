@@ -2,23 +2,47 @@ package com.namshi.sharukh.utils
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.*
-import android.media.*
-import android.os.*
-import android.text.*
+import android.graphics.Bitmap
+import android.graphics.Canvas
+import android.graphics.Color
+import android.os.Build
+import android.os.SystemClock
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.TypedValue
-import android.view.*
+import android.view.HapticFeedbackConstants
+import android.view.View
 import android.view.View.MeasureSpec
-import android.view.animation.AnimationUtils
+import android.view.Window
+import android.view.WindowManager
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
-import com.namshi.sharukh.R
 import com.namshi.sharukh.base.App
+import com.namshi.sharukh.base.GlideApp
+import com.namshi.sharukh.models.Image
 import io.reactivex.rxjava3.core.BackpressureStrategy
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
-import java.util.*
+
+
+infix fun ImageView.load(image: Image?) {
+
+    //GlideApp.with(this).clear(this)
+
+    var req = GlideApp.with(this)
+        .load(image?.url)
+        .fitCenter()
+
+    if (image != null) {
+        req = req.override(image.width.toFloat().dpToPx, image.height.toFloat().dpToPx)
+    }
+
+    req.into(this)
+    //show()
+}
+
 
 fun View.click(debounceTime: Long = 300L, action: (view: View) -> Unit) {
     this.setOnClickListener(object : View.OnClickListener {

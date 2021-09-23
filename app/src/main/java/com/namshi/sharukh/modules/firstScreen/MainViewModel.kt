@@ -26,6 +26,7 @@ class MainViewModel : ViewModel() {
         fetchInitialData()
     }
 
+    fun refresh() = fetchInitialData()
 
     private fun fetchInitialData() {
         subscriptions += model.getMainScreenContent()
@@ -33,6 +34,7 @@ class MainViewModel : ViewModel() {
             .map { it.content.filter { widget -> widget.type == NamshiWidget.Type.carousel } }
             .flatMap { Observable.fromIterable(it) }
             .flatMapCompletable { fetchCarouselData(it) }
+            .doOnSubscribe { content.postValue(null) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(::postComplete, Timber::e)

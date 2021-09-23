@@ -1,6 +1,7 @@
 package com.namshi.sharukh.base
 
 import android.app.Application
+import com.facebook.drawee.backends.pipeline.Fresco
 import io.reactivex.rxjava3.exceptions.UndeliverableException
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import timber.log.Timber
@@ -22,6 +23,7 @@ class App : Application() {
 
         initTimber()
         initRxErrorHandler()
+        Fresco.initialize(this);
         //TODO: Add custom crash screen if possible
     }
 

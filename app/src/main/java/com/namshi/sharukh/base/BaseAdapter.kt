@@ -22,7 +22,7 @@ import timber.log.Timber
 
 abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: BaseFragment? = null) : RecyclerView.Adapter<T>(), LifecycleObserver {
 
-    protected var rv: RecyclerView? = null
+    var rv: RecyclerView? = null
 
     companion object {
 
@@ -39,6 +39,7 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
     open fun onStart() {
         Timber.d("onStart")
         notifyDataSetChanged()
+
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

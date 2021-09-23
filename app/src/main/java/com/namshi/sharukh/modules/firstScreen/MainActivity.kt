@@ -2,6 +2,7 @@ package com.namshi.sharukh.modules.firstScreen
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.fragment.app.activityViewModels
 import com.google.android.material.snackbar.Snackbar
 import com.namshi.sharukh.base.BaseActivity
 import com.namshi.sharukh.databinding.ActivityFirstBinding
@@ -11,7 +12,8 @@ class MainActivity : BaseActivity() {
 
     private lateinit var binding: ActivityFirstBinding
 
-    private val viewModel: MainViewModel by viewModels()
+    private val model: MainViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,17 +31,12 @@ class MainActivity : BaseActivity() {
         setSupportActionBar(binding.toolbar)
 
         binding.fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            model.refresh()
         }
 
         addFragment(MainFragment.newInstance(), replace = true)
 
-        viewModel.content.observe(this) {
-            it
-            Timber.w("Got callback")
 
-        }
 
     }
 

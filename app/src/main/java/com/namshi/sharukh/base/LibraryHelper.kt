@@ -34,7 +34,8 @@ class NamshiGlideModule : AppGlideModule() {
         //Timber.d("applyOptions glide module $context")
         //val memoryCacheSizeBytes = 1024 * 1024 * 30 // 30mb
 
-        builder.setDefaultRequestOptions(RequestOptions().format(DecodeFormat.PREFER_RGB_565))
+        builder
+            //.setDefaultRequestOptions(RequestOptions().format(DecodeFormat.PREFER_RGB_565))
             .setDefaultTransitionOptions(Drawable::class.java, DrawableTransitionOptions.withCrossFade())
             .setDefaultTransitionOptions(Bitmap::class.java, BitmapTransitionOptions.withCrossFade())
             .setLogLevel(Log.ERROR)
