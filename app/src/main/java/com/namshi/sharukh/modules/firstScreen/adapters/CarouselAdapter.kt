@@ -8,6 +8,7 @@ import com.namshi.sharukh.base.BaseAdapter
 import com.namshi.sharukh.base.BaseViewHolder
 import com.namshi.sharukh.databinding.ItemCarouselSubBinding
 import com.namshi.sharukh.models.Image
+import com.namshi.sharukh.models.NamshiWidget
 import com.namshi.sharukh.modules.common.ActionListener
 import com.namshi.sharukh.utils.clearAndAddAll
 import com.namshi.sharukh.utils.onClick

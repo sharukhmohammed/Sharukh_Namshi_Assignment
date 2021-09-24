@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import com.bumptech.glide.Glide
 import com.namshi.sharukh.R
+import com.namshi.sharukh.misc.string
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 
 abstract class BaseActivity : AppCompatActivity() {

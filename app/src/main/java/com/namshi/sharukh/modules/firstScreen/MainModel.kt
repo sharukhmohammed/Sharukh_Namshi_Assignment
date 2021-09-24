@@ -5,6 +5,7 @@ import com.namshi.sharukh.network.response.Carousel
 import com.namshi.sharukh.network.response.HomeContent
 import com.namshi.sharukh.utils.clearAndAddAll
 import io.reactivex.rxjava3.core.Observable
+import java.util.concurrent.TimeUnit
 
 class MainModel {
 

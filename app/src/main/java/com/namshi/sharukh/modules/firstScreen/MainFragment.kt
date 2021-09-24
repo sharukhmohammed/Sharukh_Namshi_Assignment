@@ -62,11 +62,11 @@ class MainFragment : Fragment(), ActionListener {
     }
 
     private fun setData(response: ApiResponse<HomeContent>) {
+        val data = response.data
 
         binding.mainRefresh.isRefreshing = response.isLoading
-        binding.errorLayout.showIf(response.exception != null)
+        binding.errorLayout.showIf(response.exception != null && data == null)
 
-        val data = response.data
         if (data != null)
             adapter.setData(data.content)
         else

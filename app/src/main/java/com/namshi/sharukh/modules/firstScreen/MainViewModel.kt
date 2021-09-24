@@ -10,6 +10,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
+import timber.log.Timber
 
 class MainViewModel : ViewModel() {
 
@@ -45,6 +46,7 @@ class MainViewModel : ViewModel() {
                 homeContent.exception = null
                 homeContentLiveData.postValue(homeContent)
             }, {
+                Timber.e(it)
                 homeContent.isLoading = false
                 homeContent.exception = it as Exception?
                 homeContentLiveData.postValue(homeContent)
@@ -64,6 +66,7 @@ class MainViewModel : ViewModel() {
                 productList.data = it
                 productListLiveData.postValue(productList)
             }, {
+                Timber.e(it)
                 productList.isLoading = false
                 productList.exception = it as Exception?
                 productListLiveData.postValue(productList)

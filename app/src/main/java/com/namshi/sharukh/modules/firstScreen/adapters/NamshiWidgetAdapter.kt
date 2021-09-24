@@ -15,7 +15,6 @@ import com.namshi.sharukh.modules.common.ActionListener
 import com.namshi.sharukh.utils.clearAndAddAll
 import com.namshi.sharukh.utils.gone
 import com.namshi.sharukh.utils.toDp
-import timber.log.Timber
 
 
 class NamshiWidgetAdapter(private val listener: ActionListener) : RecyclerView.Adapter<NamshiWidgetAdapter.Holder>() {
@@ -115,6 +114,7 @@ class NamshiWidgetAdapter(private val listener: ActionListener) : RecyclerView.A
                         carouselLoading.show()
                     } else {
                         carouselLoading.gone()
+                        carouselTitle.text = widget.title
                         carouselRecycler.setRecycledViewPool(carouselViewPool)
                         carouselRecycler.adapter = CarouselAdapter(listener).apply { setData(widget.images) }
                     }
