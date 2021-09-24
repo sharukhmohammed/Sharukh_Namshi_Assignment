@@ -1,6 +1,6 @@
 package com.namshi.sharukh.base
 
-import android.content.*
+import android.content.Intent
 import android.os.Handler
 import android.os.Looper
 import android.view.View
@@ -40,8 +40,10 @@ abstract class BaseActivity : AppCompatActivity() {
      */
     fun addFragment(
         fragment: Fragment,
-        containerId: Int = R.id.container, replace: Boolean = false, addToBackStack: Boolean = true,
-        tag: String = fragment.javaClass.simpleName, fragmentManager: FragmentManager = supportFragmentManager
+        replace: Boolean = false, addToBackStack: Boolean = true,
+        tag: String = fragment.javaClass.simpleName,
+        fragmentManager: FragmentManager = supportFragmentManager,
+        containerId: Int = R.id.container,
     ) {
 
         val transaction = fragmentManager.beginTransaction()

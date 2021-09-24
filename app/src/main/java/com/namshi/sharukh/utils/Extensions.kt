@@ -44,7 +44,7 @@ infix fun ImageView.load(image: Image?) {
 }
 
 
-fun View.click(debounceTime: Long = 300L, action: (view: View) -> Unit) {
+fun View.onClick(debounceTime: Long = 300L, action: (view: View) -> Unit) {
     this.setOnClickListener(object : View.OnClickListener {
         private var lastClickTime: Long = 0
 
@@ -56,7 +56,7 @@ fun View.click(debounceTime: Long = 300L, action: (view: View) -> Unit) {
     })
 }
 
-fun List<View>.click(debounceTime: Long = 300L, action: (view: View) -> Unit) {
+fun List<View>.onClick(debounceTime: Long = 300L, action: (view: View) -> Unit) {
     val listener = object : View.OnClickListener {
         private var lastClickTime: Long = 0
 

@@ -4,11 +4,22 @@ import com.namshi.sharukh.models.Image
 import com.namshi.sharukh.models.NamshiWidget
 import kotlinx.serialization.Serializable
 
+
+class ApiResponse<T> {
+    var isLoading: Boolean = false
+    var exception: Exception? = null
+    var data: T? = null
+}
+
+
 /**
  * API 1 Response
  * */
 @Serializable
-data class ContentResponse(val content: List<NamshiWidget> = listOf())
+data class HomeContent(val content: List<NamshiWidget> = listOf())
 
+/**
+ * API 2, 3, 4 Response
+* */
 @Serializable
-data class CarouselResponse(val images: List<Image> = listOf())
+data class Carousel(val images: List<Image> = listOf())

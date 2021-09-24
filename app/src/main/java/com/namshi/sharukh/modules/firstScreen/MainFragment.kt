@@ -1,21 +1,23 @@
 package com.namshi.sharukh.modules.firstScreen
 
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.namshi.sharukh.base.BaseActivity
 import com.namshi.sharukh.databinding.FragmentFirstBinding
-import com.namshi.sharukh.models.NamshiWidget
+import com.namshi.sharukh.models.Image
+import com.namshi.sharukh.modules.common.ActionListener
 import com.namshi.sharukh.modules.firstScreen.adapters.NamshiWidgetAdapter
-import com.namshi.sharukh.network.response.ContentResponse
+import com.namshi.sharukh.modules.secondScreen.ProductGridFragment
+import com.namshi.sharukh.network.response.HomeContent
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), ActionListener {
 
     companion object {
         fun newInstance(): MainFragment {
@@ -46,7 +48,7 @@ class MainFragment : Fragment() {
 
 
         binding.mainRecycler.apply {
-            adapter = NamshiWidgetAdapter().apply {
+            adapter = NamshiWidgetAdapter(this@MainFragment).apply {
                 this@MainFragment.adapter = this
             }
         }
@@ -59,7 +61,7 @@ class MainFragment : Fragment() {
         _binding = null
     }
 
-    private fun setData(data: ContentResponse?) {
+    private fun setData(data: HomeContent?) {
 
         //TransitionManager.beginDelayedTransition(binding.root)
         if (data == null) {
@@ -70,5 +72,9 @@ class MainFragment : Fragment() {
 
         }
 
+    }
+
+    override fun onItemClick(image: Image) {
+        (activity as BaseActivity).addFragment(ProductGridFragment.newInstance(), true, addToBackStack = true)
     }
 }

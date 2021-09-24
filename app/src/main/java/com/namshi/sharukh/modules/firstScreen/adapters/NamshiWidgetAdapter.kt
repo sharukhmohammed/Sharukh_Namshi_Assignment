@@ -11,11 +11,14 @@ import com.namshi.sharukh.databinding.ItemCarouselBinding
 import com.namshi.sharukh.databinding.ItemImageBinding
 import com.namshi.sharukh.databinding.ItemSliderBinding
 import com.namshi.sharukh.models.NamshiWidget
-import com.namshi.sharukh.utils.*
+import com.namshi.sharukh.modules.common.ActionListener
+import com.namshi.sharukh.utils.clearAndAddAll
+import com.namshi.sharukh.utils.gone
+import com.namshi.sharukh.utils.toDp
 import timber.log.Timber
 
 
-class NamshiWidgetAdapter : RecyclerView.Adapter<NamshiWidgetAdapter.Holder>() {
+class NamshiWidgetAdapter(private val listener: ActionListener) : RecyclerView.Adapter<NamshiWidgetAdapter.Holder>() {
 
     private val items: MutableList<NamshiWidget> = mutableListOf()
 
@@ -71,8 +74,6 @@ class NamshiWidgetAdapter : RecyclerView.Adapter<NamshiWidgetAdapter.Holder>() {
                     imageRecycler.apply {
 //
                         setRecycledViewPool(imageViewPool)
-//                        isNestedScrollingEnabled = false
-//                        setHasFixedSize(true)
 
                         layoutManager = GridLayoutManager(context, widget.cols)
                         if (layoutManager == null) {
@@ -80,7 +81,7 @@ class NamshiWidgetAdapter : RecyclerView.Adapter<NamshiWidgetAdapter.Holder>() {
                         }
 
 
-                        adapter = ImageRowAdapter().apply { setData(widget) }
+                        adapter = ImageRowAdapter(listener).apply { setData(widget) }
                         if (adapter == null) {
                             Timber.d("srk_log onBindViewHolder => setting adapter at $position")
                         }
@@ -98,16 +99,12 @@ class NamshiWidgetAdapter : RecyclerView.Adapter<NamshiWidgetAdapter.Holder>() {
                     root.layoutParams.apply {
                         height = widget.height.toDp(root.context)
                     }
-//                    root.layoutParams.apply {
-//                        //height = widget.images.first().height.toFloat().dpToPx
-//                        height = 200F.dpToPx
-//                    }
 
                     sliderRecycler.apply {
                         setRecycledViewPool(sliderViewPool)
                         if (onFlingListener == null)
                             PagerSnapHelper().attachToRecyclerView(this)
-                        adapter = SliderAdapter().apply { setData(widget.images) }
+                        adapter = SliderAdapter(listener).apply { setData(widget.images) }
                     }
                 }
             }
@@ -118,8 +115,6 @@ class NamshiWidgetAdapter : RecyclerView.Adapter<NamshiWidgetAdapter.Holder>() {
 
                     root.layoutParams.apply {
                         height = widget.heightPx
-//                        height = 200F.dpToPx
-
                     }
 
                     if (widget.images.isEmpty()) {
@@ -127,7 +122,7 @@ class NamshiWidgetAdapter : RecyclerView.Adapter<NamshiWidgetAdapter.Holder>() {
                     } else {
                         carouselLoading.gone()
                         carouselRecycler.setRecycledViewPool(carouselViewPool)
-                        carouselRecycler.adapter = CarouselAdapter().apply { setData(widget.images) }
+                        carouselRecycler.adapter = CarouselAdapter(listener).apply { setData(widget.images) }
                     }
                 }
             }

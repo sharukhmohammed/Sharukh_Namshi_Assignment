@@ -1,7 +1,7 @@
 package com.namshi.sharukh.network
 
-import com.namshi.sharukh.network.response.CarouselResponse
-import com.namshi.sharukh.network.response.ContentResponse
+import com.namshi.sharukh.network.response.Carousel
+import com.namshi.sharukh.network.response.HomeContent
 import io.reactivex.rxjava3.core.Observable
 import retrofit2.http.GET
 import retrofit2.http.Url
@@ -10,8 +10,11 @@ import retrofit2.http.Url
 interface Api {
 
     @GET("content")
-    fun api1Content() : Observable<ContentResponse>
+    fun api1Content() : Observable<HomeContent>
+
+    @GET("list")
+    fun api2List() : Observable<Carousel>
 
     @GET
-    fun getCarouselData(@Url url: String): Observable<CarouselResponse>
+    fun getCarouselData(@Url url: String): Observable<Carousel>
 }

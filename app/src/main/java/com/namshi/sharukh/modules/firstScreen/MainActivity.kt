@@ -2,11 +2,9 @@ package com.namshi.sharukh.modules.firstScreen
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.fragment.app.activityViewModels
-import com.google.android.material.snackbar.Snackbar
 import com.namshi.sharukh.base.BaseActivity
 import com.namshi.sharukh.databinding.ActivityFirstBinding
-import timber.log.Timber
+import com.namshi.sharukh.utils.gone
 
 class MainActivity : BaseActivity() {
 
@@ -21,7 +19,6 @@ class MainActivity : BaseActivity() {
         binding = ActivityFirstBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         initViews()
     }
 
@@ -29,14 +26,15 @@ class MainActivity : BaseActivity() {
     private fun initViews() {
 
         setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = "Sharukh x Namshi"
 
         binding.fab.setOnClickListener { view ->
             model.refresh()
         }
 
-        addFragment(MainFragment.newInstance(), replace = true)
+        binding.fab.gone()
 
-
+        addFragment(MainFragment.newInstance(), replace = true, addToBackStack = false)
 
     }
 

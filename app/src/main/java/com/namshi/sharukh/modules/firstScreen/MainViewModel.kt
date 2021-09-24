@@ -3,7 +3,8 @@ package com.namshi.sharukh.modules.firstScreen
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.namshi.sharukh.models.NamshiWidget
-import com.namshi.sharukh.network.response.ContentResponse
+import com.namshi.sharukh.network.response.Carousel
+import com.namshi.sharukh.network.response.HomeContent
 import com.namshi.sharukh.utils.clearAndAddAll
 import com.namshi.sharukh.utils.plusAssign
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -16,7 +17,8 @@ import timber.log.Timber
 class MainViewModel : ViewModel() {
 
 
-    val content: MutableLiveData<ContentResponse?> = MutableLiveData()
+    val content: MutableLiveData<HomeContent?> = MutableLiveData()
+    val productList: MutableLiveData<Carousel?> = MutableLiveData()
 
 
     private val model: MainModel = MainModel()
@@ -55,6 +57,16 @@ class MainViewModel : ViewModel() {
                 Completable.complete()
             }
             .subscribeOn(Schedulers.io())
+    }
+
+    fun getProductList() {
+        subscriptions += model.getProductList()
+            .map { productList.postValue(it) }
+            .doOnSubscribe { productList.postValue(null) }
+            .flatMapCompletable { Completable.complete() }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe(::postComplete, Timber::e)
     }
 
     override fun onCleared() {
