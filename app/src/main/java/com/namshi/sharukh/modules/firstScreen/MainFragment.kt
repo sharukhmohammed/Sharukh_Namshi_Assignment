@@ -12,7 +12,10 @@ import com.namshi.sharukh.models.Image
 import com.namshi.sharukh.modules.common.ActionListener
 import com.namshi.sharukh.modules.firstScreen.adapters.NamshiWidgetAdapter
 import com.namshi.sharukh.modules.secondScreen.ProductGridFragment
+import com.namshi.sharukh.network.response.ApiResponse
 import com.namshi.sharukh.network.response.HomeContent
+import com.namshi.sharukh.utils.onClick
+import com.namshi.sharukh.utils.showIf
 
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
@@ -46,14 +49,11 @@ class MainFragment : Fragment(), ActionListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
-        binding.mainRecycler.apply {
-            adapter = NamshiWidgetAdapter(this@MainFragment).apply {
-                this@MainFragment.adapter = this
-            }
-        }
-
-        viewModel.content.observe(viewLifecycleOwner, ::setData)
+        adapter = NamshiWidgetAdapter(this)
+        binding.mainRecycler.adapter = adapter
+        binding.mainRefresh.setOnRefreshListener { viewModel.refreshMainScreen() }
+        binding.errorLayout.onClick { viewModel.refreshMainScreen() }
+        viewModel.homeContentLiveData.observe(viewLifecycleOwner, ::setData)
     }
 
     override fun onDestroyView() {
@@ -61,17 +61,16 @@ class MainFragment : Fragment(), ActionListener {
         _binding = null
     }
 
-    private fun setData(data: HomeContent?) {
+    private fun setData(response: ApiResponse<HomeContent>) {
 
-        //TransitionManager.beginDelayedTransition(binding.root)
-        if (data == null) {
+        binding.mainRefresh.isRefreshing = response.isLoading
+        binding.errorLayout.showIf(response.exception != null)
+
+        val data = response.data
+        if (data != null)
+            adapter.setData(data.content)
+        else
             adapter.setData(listOf())
-        } else {
-            val filtered = data.content
-            adapter.setData(filtered)
-
-        }
-
     }
 
     override fun onItemClick(image: Image) {

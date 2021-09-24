@@ -2,6 +2,7 @@ package com.namshi.sharukh.network.response
 
 import com.namshi.sharukh.models.Image
 import com.namshi.sharukh.models.NamshiWidget
+import com.namshi.sharukh.utils.Constant
 import kotlinx.serialization.Serializable
 
 
@@ -22,4 +23,4 @@ data class HomeContent(val content: List<NamshiWidget> = listOf())
  * API 2, 3, 4 Response
 * */
 @Serializable
-data class Carousel(val images: List<Image> = listOf())
+data class Carousel(val images: List<Image> = listOf(), var url: String = Constant.EMPTY_STR)

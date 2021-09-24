@@ -10,7 +10,10 @@ import com.namshi.sharukh.databinding.FragmentSecondBinding
 import com.namshi.sharukh.models.Image
 import com.namshi.sharukh.modules.common.ActionListener
 import com.namshi.sharukh.modules.firstScreen.MainViewModel
+import com.namshi.sharukh.network.response.ApiResponse
 import com.namshi.sharukh.network.response.Carousel
+import com.namshi.sharukh.utils.onClick
+import com.namshi.sharukh.utils.showIf
 
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
@@ -49,11 +52,10 @@ class ProductGridFragment : Fragment(), ActionListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.apply {
-            gridRecycler.adapter = ProductGridAdapter(this@ProductGridFragment).also { adapter = it }
-        }
-
-        viewModel.productList.observe(viewLifecycleOwner, ::setData)
+        binding.gridRecycler.adapter = ProductGridAdapter(this@ProductGridFragment).also { adapter = it }
+        binding.gridRefresh.setOnRefreshListener { viewModel.refreshProductScreen() }
+        binding.errorLayout.onClick { viewModel.refreshProductScreen() }
+        viewModel.productListLiveData.observe(viewLifecycleOwner, ::setData)
     }
 
     override fun onDestroyView() {
@@ -65,11 +67,13 @@ class ProductGridFragment : Fragment(), ActionListener {
 
     }
 
-    private fun setData(data: Carousel?) {
-        if (data == null) {
-
-        } else {
+    private fun setData(response: ApiResponse<Carousel>) {
+        binding.gridRefresh.isRefreshing = response.isLoading
+        binding.errorLayout.showIf(response.exception != null)
+        val data = response.data
+        if (data != null)
             adapter.setData(data.images)
-        }
+        else
+            adapter.setData(listOf())
     }
 }

@@ -29,7 +29,7 @@ class MainActivity : BaseActivity() {
         supportActionBar?.title = "Sharukh x Namshi"
 
         binding.fab.setOnClickListener { view ->
-            model.refresh()
+            model.refreshMainScreen()
         }
 
         binding.fab.gone()

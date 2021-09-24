@@ -2,24 +2,23 @@ package com.namshi.sharukh.modules.firstScreen
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.namshi.sharukh.models.NamshiWidget
+import com.namshi.sharukh.network.response.ApiResponse
 import com.namshi.sharukh.network.response.Carousel
 import com.namshi.sharukh.network.response.HomeContent
-import com.namshi.sharukh.utils.clearAndAddAll
 import com.namshi.sharukh.utils.plusAssign
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
-import timber.log.Timber
 
 class MainViewModel : ViewModel() {
 
 
-    val content: MutableLiveData<HomeContent?> = MutableLiveData()
-    val productList: MutableLiveData<Carousel?> = MutableLiveData()
+    private val homeContent: ApiResponse<HomeContent> = ApiResponse()
+    val homeContentLiveData: MutableLiveData<ApiResponse<HomeContent>> = MutableLiveData(ApiResponse())
 
+    private val productList: ApiResponse<Carousel> = ApiResponse()
+    val productListLiveData: MutableLiveData<ApiResponse<Carousel>> = MutableLiveData(ApiResponse())
 
     private val model: MainModel = MainModel()
     private val subscriptions = CompositeDisposable()
@@ -28,45 +27,47 @@ class MainViewModel : ViewModel() {
         fetchInitialData()
     }
 
-    fun refresh() = fetchInitialData()
+    fun refreshMainScreen() = fetchInitialData()
+    fun refreshProductScreen() = getProductList()
 
     private fun fetchInitialData() {
         subscriptions += model.getMainScreenContent()
-            .map { content.postValue(it); it }
-            .map { it.content.filter { widget -> widget.type == NamshiWidget.Type.carousel } }
-            .flatMap { Observable.fromIterable(it) }
-            .flatMapCompletable { fetchCarouselData(it) }
-            .doOnSubscribe { content.postValue(null) }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::postComplete, Timber::e)
-    }
-
-    private fun postComplete() {
-        Timber.i("Complete => All ok")
-    }
-
-    private fun fetchCarouselData(widget: NamshiWidget): Completable {
-        Timber.w("Calling => ${widget.url}")
-        return model.getCarouselData(widget)
-            .flatMapCompletable { response ->
-                Timber.w("Got response => ${widget.url}")
-                val data = content.value?.content?.find { it.url == widget.url }
-                data?.images?.clearAndAddAll(response.images)
-                content.postValue(content.value)
-                Completable.complete()
+            .doOnSubscribe {
+                homeContent.isLoading = true
+                homeContentLiveData.postValue(homeContent)
             }
-            .subscribeOn(Schedulers.io())
+            //.flatMap { Observable.error<HomeContent>(Exception("asd")) }
+            .subscribe({
+                homeContent.isLoading = false
+                homeContent.data = it
+                homeContent.exception = null
+                homeContentLiveData.postValue(homeContent)
+            }, {
+                homeContent.isLoading = false
+                homeContent.exception = it as Exception?
+                homeContentLiveData.postValue(homeContent)
+            })
     }
 
     fun getProductList() {
         subscriptions += model.getProductList()
-            .map { productList.postValue(it) }
-            .doOnSubscribe { productList.postValue(null) }
-            .flatMapCompletable { Completable.complete() }
+            .doOnSubscribe {
+                productList.isLoading = true
+                productListLiveData.postValue(productList)
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(::postComplete, Timber::e)
+            .subscribe({
+                productList.isLoading = false
+                productList.data = it
+                productListLiveData.postValue(productList)
+            }, {
+                productList.isLoading = false
+                productList.exception = it as Exception?
+                productListLiveData.postValue(productList)
+            })
     }
 
     override fun onCleared() {

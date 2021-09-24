@@ -30,7 +30,6 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
 
 
     init {
-        Timber.d("init with fragment ${fragment?.javaClass?.simpleName}")
         fragment?.viewLifecycleOwner?.lifecycle?.addObserver(this)
     }
 

@@ -76,22 +76,17 @@ class NamshiWidgetAdapter(private val listener: ActionListener) : RecyclerView.A
                         setRecycledViewPool(imageViewPool)
 
                         layoutManager = GridLayoutManager(context, widget.cols)
-                        if (layoutManager == null) {
-                            Timber.d("srk_log onBindViewHolder => setting layout manager at $position")
-                        }
+
 
 
                         adapter = ImageRowAdapter(listener).apply { setData(widget) }
-                        if (adapter == null) {
-                            Timber.d("srk_log onBindViewHolder => setting adapter at $position")
-                        }
+
                         //else
                         //adapter?.notifyDataSetChanged()
                     }
                 }
             }
             NamshiWidget.Type.slider.asInt -> {
-                Timber.d("srk_log SLIDER onBindViewHolder -> $position")
 
 
                 ItemSliderBinding.bind(holder.itemView).apply {
@@ -109,7 +104,6 @@ class NamshiWidgetAdapter(private val listener: ActionListener) : RecyclerView.A
                 }
             }
             NamshiWidget.Type.carousel.asInt -> {
-                Timber.d("srk_log CAROUSEL onBindViewHolder -> $position")
 
                 ItemCarouselBinding.bind(holder.itemView).apply {
 
