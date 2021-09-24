@@ -10,6 +10,7 @@ import com.namshi.sharukh.models.Image
 import com.namshi.sharukh.modules.common.ActionListener
 import com.namshi.sharukh.utils.clearAndAddAll
 import com.namshi.sharukh.utils.load
+import com.namshi.sharukh.utils.onClick
 
 
 class ProductGridAdapter(private val listener: ActionListener) : RecyclerView.Adapter<ProductGridAdapter.Holder>() {
@@ -18,8 +19,10 @@ class ProductGridAdapter(private val listener: ActionListener) : RecyclerView.Ad
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(LayoutInflater.from(parent.context).inflate(R.layout.item_grid, parent, false)).apply {
-
-
+            itemView.onClick {
+                val image = items[adapterPosition]
+                listener.onItemClick(image)
+            }
         }
     }
 

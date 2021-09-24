@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import com.namshi.sharukh.base.BaseFragment
 import com.namshi.sharukh.databinding.FragmentSecondBinding
 import com.namshi.sharukh.models.Image
+import com.namshi.sharukh.modules.ViewProductFragment
 import com.namshi.sharukh.modules.common.ActionListener
 import com.namshi.sharukh.modules.firstScreen.MainViewModel
 import com.namshi.sharukh.network.response.ApiResponse
@@ -18,7 +20,7 @@ import com.namshi.sharukh.utils.showIf
 /**
  * A simple [Fragment] subclass as the second destination in the navigation.
  */
-class ProductGridFragment : Fragment(), ActionListener {
+class ProductGridFragment : BaseFragment(), ActionListener {
 
     companion object {
         fun newInstance(): ProductGridFragment {
@@ -28,6 +30,9 @@ class ProductGridFragment : Fragment(), ActionListener {
             return fragment
         }
     }
+
+    override val screenTitle: String?
+        get() = "ProductGridFragment"
 
     private var _binding: FragmentSecondBinding? = null
 
@@ -64,13 +69,13 @@ class ProductGridFragment : Fragment(), ActionListener {
     }
 
     override fun onItemClick(image: Image) {
-
+        activity?.addFragment(ViewProductFragment.newInstance(image.url))
     }
 
     private fun setData(response: ApiResponse<Carousel>) {
-        binding.gridRefresh.isRefreshing = response.isLoading
-        binding.errorLayout.showIf(response.exception != null)
         val data = response.data
+        binding.gridRefresh.isRefreshing = response.isLoading && data == null
+        binding.errorLayout.showIf(response.exception != null && data == null)
         if (data != null)
             adapter.setData(data.images)
         else

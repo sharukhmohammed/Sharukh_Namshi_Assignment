@@ -22,7 +22,6 @@ class App : Application() {
 
         initTimber()
         initRxErrorHandler()
-        //TODO: Add custom crash screen if possible
     }
 
     private fun initTimber() {

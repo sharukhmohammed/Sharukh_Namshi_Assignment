@@ -138,6 +138,5 @@ abstract class BaseFragment : Fragment() {
     }
 
 
-    internal fun launchActivity(intent: Intent) = activity?.launchActivity(intent)
 
 }

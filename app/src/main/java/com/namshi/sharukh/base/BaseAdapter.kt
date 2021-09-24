@@ -22,7 +22,7 @@ import timber.log.Timber
 
 abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: BaseFragment? = null) : RecyclerView.Adapter<T>(), LifecycleObserver {
 
-    var rv: RecyclerView? = null
+    protected var rv: RecyclerView? = null
 
     companion object {
 
@@ -68,7 +68,7 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
     }
 
     /**
-     * Clients can override this method to clear of resources for all view holders available
+     * Children can override this method to clear of resources for all view holders available
      * in recycler view at the moment
      * Helpful to release glide resources
      */

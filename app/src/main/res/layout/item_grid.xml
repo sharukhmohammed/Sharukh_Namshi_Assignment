@@ -9,6 +9,7 @@
         android:id="@+id/grid_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:transitionName="prod_image"
         android:adjustViewBounds="true"
         android:contentDescription="@string/app_name"
         app:layout_constraintStart_toStartOf="parent"

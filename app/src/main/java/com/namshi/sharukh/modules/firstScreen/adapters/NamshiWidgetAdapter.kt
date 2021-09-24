@@ -7,6 +7,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.namshi.sharukh.R
+import com.namshi.sharukh.base.BaseAdapter
+import com.namshi.sharukh.base.BaseFragment
 import com.namshi.sharukh.databinding.ItemCarouselBinding
 import com.namshi.sharukh.databinding.ItemImageBinding
 import com.namshi.sharukh.databinding.ItemSliderBinding
@@ -17,7 +19,7 @@ import com.namshi.sharukh.utils.gone
 import com.namshi.sharukh.utils.toDp
 
 
-class NamshiWidgetAdapter(private val listener: ActionListener) : RecyclerView.Adapter<NamshiWidgetAdapter.Holder>() {
+class NamshiWidgetAdapter(private val fragment: BaseFragment, private val listener: ActionListener) : BaseAdapter<NamshiWidgetAdapter.Holder>(fragment) {
 
     private val items: MutableList<NamshiWidget> = mutableListOf()
 
@@ -98,7 +100,7 @@ class NamshiWidgetAdapter(private val listener: ActionListener) : RecyclerView.A
                         setRecycledViewPool(sliderViewPool)
                         if (onFlingListener == null)
                             PagerSnapHelper().attachToRecyclerView(this)
-                        adapter = SliderAdapter(listener).apply { setData(widget.images) }
+                        adapter = SliderAdapter(fragment, listener).apply { setData(widget.images) }
                     }
                 }
             }

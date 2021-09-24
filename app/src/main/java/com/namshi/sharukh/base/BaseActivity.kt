@@ -1,18 +1,17 @@
 package com.namshi.sharukh.base
 
-import android.content.Intent
 import android.os.Handler
 import android.os.Looper
-import android.view.View
-import androidx.annotation.StringRes
+import androidx.annotation.TransitionRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Lifecycle
 import com.bumptech.glide.Glide
 import com.namshi.sharukh.R
-import com.namshi.sharukh.misc.string
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+
 
 abstract class BaseActivity : AppCompatActivity() {
 
@@ -21,6 +20,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
 
     companion object {
+
     }
 
 
@@ -33,7 +33,6 @@ abstract class BaseActivity : AppCompatActivity() {
         subscriptions.clear()
         super.onDestroy()
     }
-
 
     /**
      * Adds fragment on current stack
@@ -53,9 +52,11 @@ abstract class BaseActivity : AppCompatActivity() {
 
         if (replace) {
             transaction.replace(containerId, fragment, tag)
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
         } else {
             val oldFragment = getCurrentTopFragment(fragmentManager)
             oldFragment?.let { transaction.setMaxLifecycle(it, Lifecycle.State.STARTED) }
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             //set maxLifecycle of CurrentTopFragment to STARTED, when fragment is being added only,
             //No need to setMaxLifecycle when fragment is being replaced
             transaction.add(containerId, fragment, tag)
@@ -67,30 +68,6 @@ abstract class BaseActivity : AppCompatActivity() {
         //this does not crash in case activity was not in correct state
         transaction.commitAllowingStateLoss()
     }
-
-
-    /**
-     * Launch new activity with transition and stuff
-     */
-    fun launchActivity(intent: Intent, finishSelf: Boolean = false) {
-
-        if (finishSelf) finish()
-        startActivity(intent)
-    }
-
-
-    /**
-     * Shows snack from root layout of activity if view is null or else from the parent view
-     */
-    fun showSnack(message: String, view: View? = null) {
-        //TODO: Implement snack
-    }
-
-    /**
-     *Overloaded above function to include string()
-     * */
-    fun showSnack(@StringRes string: Int, view: View? = null) = showSnack(string(string), view)
-
 
     private fun getCurrentTopFragment(fragmentManager: FragmentManager): Fragment? {
         try {
