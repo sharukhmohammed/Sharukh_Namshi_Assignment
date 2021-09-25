@@ -14,10 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
  *
  *
  * Also optional connection to Lifecycle if fragment is provided.
- * Clients get access to clearHolders method which is invoked on lifecycles onStart and onStop methods.
+ * children get access to clearHolders method which is invoked on lifecycles onStart and onStop methods.
  */
-
-
 abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: BaseFragment? = null) : RecyclerView.Adapter<T>(), LifecycleObserver {
 
     protected var rv: RecyclerView? = null

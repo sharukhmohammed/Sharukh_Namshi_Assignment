@@ -16,6 +16,9 @@ import com.namshi.sharukh.utils.clearAndAddAll
 import com.namshi.sharukh.utils.load
 import com.namshi.sharukh.utils.onClick
 
+/**
+ * Displays one image at a time, which auto jump to next item after [AUT0_SCROLL_TIMER]
+* */
 class SliderAdapter(private val fragment: BaseFragment, private val listener: ActionListener) : BaseAdapter<SliderAdapter.Holder>(fragment) {
 
     private val items: MutableList<Image> = mutableListOf()

@@ -6,6 +6,11 @@ import com.namshi.sharukh.network.response.HomeContent
 import com.namshi.sharukh.utils.clearAndAddAll
 import io.reactivex.rxjava3.core.Observable
 
+/**
+ * Grabs Data from the [MainRepo]
+ * - Main Screen content
+ * - Product List
+* */
 class MainModel {
 
     private val repo = MainRepo()

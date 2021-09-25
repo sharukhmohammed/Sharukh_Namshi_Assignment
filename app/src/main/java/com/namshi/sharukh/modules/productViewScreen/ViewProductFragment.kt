@@ -41,7 +41,7 @@ class ViewProductFragment : BaseFragment() {
             .load(imageUrl)
             .into(binding.productImage)
 
-        binding.root.onClick() { activity?.onBackPressed() }
+        binding.root.onClick { activity?.onBackPressed() }
     }
 
 

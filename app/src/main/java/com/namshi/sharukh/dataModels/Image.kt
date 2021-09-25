@@ -4,6 +4,9 @@ import com.namshi.sharukh.utils.Constant
 import com.namshi.sharukh.utils.dpToPx
 import kotlinx.serialization.Serializable
 
+/**
+ * Image data class type which represents an Image from API response
+* */
 @Serializable
 data class Image(
     val url: String = Constant.EMPTY_STR,

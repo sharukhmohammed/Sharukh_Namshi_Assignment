@@ -1,19 +1,12 @@
 package com.namshi.sharukh.base
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.namshi.sharukh.R
-import com.namshi.sharukh.utils.gone
-import com.namshi.sharukh.utils.show
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import timber.log.Timber
 

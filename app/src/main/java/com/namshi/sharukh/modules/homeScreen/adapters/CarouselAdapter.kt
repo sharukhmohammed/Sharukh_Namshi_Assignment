@@ -8,11 +8,15 @@ import com.namshi.sharukh.base.BaseAdapter
 import com.namshi.sharukh.base.BaseViewHolder
 import com.namshi.sharukh.databinding.ItemCarouselSubBinding
 import com.namshi.sharukh.dataModels.Image
+import com.namshi.sharukh.dataModels.NamshiWidget
 import com.namshi.sharukh.modules.common.ActionListener
 import com.namshi.sharukh.utils.clearAndAddAll
 import com.namshi.sharukh.utils.load
 import com.namshi.sharukh.utils.onClick
 
+/**
+ * Adapter to display [NamshiWidget.Type]
+* */
 class CarouselAdapter(private val listener: ActionListener) : BaseAdapter<CarouselAdapter.Holder>() {
     private val items: MutableList<Image> = mutableListOf()
 

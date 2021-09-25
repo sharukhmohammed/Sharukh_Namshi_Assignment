@@ -4,6 +4,9 @@ import com.namshi.sharukh.utils.Constant
 import com.namshi.sharukh.utils.dpToPx
 import kotlinx.serialization.Serializable
 
+/**
+ * Parent Data model class which holds data depending on type of [NamshiWidget.Type]
+* */
 @Serializable
 data class NamshiWidget(
     val type: Type = Type.unknown,

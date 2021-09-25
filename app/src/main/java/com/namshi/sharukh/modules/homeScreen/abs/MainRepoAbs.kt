@@ -8,6 +8,9 @@ import com.namshi.sharukh.network.response.HomeContent
 import io.reactivex.rxjava3.core.Observable
 import java.util.concurrent.TimeUnit
 
+/**
+ * Main Repo where it defines what data it provides of the Home screen, product list.
+* */
 abstract class MainRepoAbs {
 
     companion object {

@@ -9,6 +9,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 
+/**
+ * Network module for the whole app
+ * Generates serializers and callback factories, loggers etc
+* */
 @ExperimentalSerializationApi
 object NetworkClient {
 

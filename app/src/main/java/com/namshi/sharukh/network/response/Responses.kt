@@ -5,7 +5,9 @@ import com.namshi.sharukh.dataModels.NamshiWidget
 import com.namshi.sharukh.utils.Constant
 import kotlinx.serialization.Serializable
 
-
+/**
+ * Common wrapper class for response to understand it's state
+* */
 class ApiResponse<T> {
     var isLoading: Boolean = false
     var exception: Exception? = null
