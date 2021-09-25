@@ -3,7 +3,7 @@ package com.namshi.sharukh.modules.homeScreen
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.namshi.sharukh.network.response.ApiResponse
-import com.namshi.sharukh.network.response.Carousel
+import com.namshi.sharukh.network.response.CarouselContent
 import com.namshi.sharukh.network.response.HomeContent
 import com.namshi.sharukh.utils.plusAssign
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -17,8 +17,8 @@ class MainViewModel : ViewModel() {
     private val homeContent: ApiResponse<HomeContent> = ApiResponse()
     val homeContentLiveData: MutableLiveData<ApiResponse<HomeContent>> = MutableLiveData(ApiResponse())
 
-    private val productList: ApiResponse<Carousel> = ApiResponse()
-    val productListLiveData: MutableLiveData<ApiResponse<Carousel>> = MutableLiveData(ApiResponse())
+    private val productList: ApiResponse<CarouselContent> = ApiResponse()
+    val productListLiveData: MutableLiveData<ApiResponse<CarouselContent>> = MutableLiveData(ApiResponse())
 
     private val model: MainModel = MainModel()
     private val subscriptions = CompositeDisposable()

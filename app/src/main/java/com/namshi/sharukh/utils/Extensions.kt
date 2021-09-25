@@ -5,8 +5,8 @@ import android.util.TypedValue
 import android.view.HapticFeedbackConstants
 import android.view.View
 import android.widget.ImageView
-import com.namshi.sharukh.base.GlideApp
 import com.namshi.sharukh.dataModels.Image
+import com.namshi.sharukh.misc.GlideApp
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 
@@ -49,17 +49,13 @@ fun View.gone() {
 /**
  * conditional visibility of view
  * @param condition condition which must be satisfied for this view to be visible
- * @param hide if true, view will be hidden in case condition fails, else view will be set to gone
  */
-fun View.showIf(condition: Boolean?, hide: Boolean = false) {
+fun View.showIf(condition: Boolean?) {
     if (condition == true) show()
-    else {
-        if (hide) hide()
-        else gone()
-    }
+    else gone()
 }
 
-val Number.toPx get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), Resources.getSystem().displayMetrics)
+val Number.dpToPx get() = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, this.toFloat(), Resources.getSystem().displayMetrics)
 
 fun <E> MutableList<E>.clearAndAddAll(elements: Collection<E>) {
     this.clear()

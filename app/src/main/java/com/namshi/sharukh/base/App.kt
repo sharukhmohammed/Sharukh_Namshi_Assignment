@@ -1,6 +1,7 @@
 package com.namshi.sharukh.base
 
 import android.app.Application
+import com.namshi.sharukh.misc.HyperlinkedDebugTree
 import io.reactivex.rxjava3.exceptions.UndeliverableException
 import io.reactivex.rxjava3.plugins.RxJavaPlugins
 import timber.log.Timber

@@ -40,7 +40,7 @@ class ImageRowAdapter(private val listener: ActionListener) : BaseAdapter<ImageR
 
     fun setData(data: NamshiWidget) {
         items.clearAndAddAll(data.images)
-        count = if (data.cols == -1) 0 else data.cols
+        count = if (data.cols > 0) data.cols else 0
         notifyDataSetChanged()
     }
 

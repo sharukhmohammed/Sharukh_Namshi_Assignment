@@ -1,7 +1,9 @@
-package com.namshi.sharukh.modules.homeScreen.abs
+package com.namshi.sharukh.modules.homeScreen
 
 import com.google.common.truth.Truth.assertThat
 import com.namshi.sharukh.dataModels.NamshiWidget
+import com.namshi.sharukh.modules.homeScreen.abs.MainRepoNoNetwork
+import com.namshi.sharukh.modules.homeScreen.abs.MainRepoTimeout
 import org.junit.Before
 import org.junit.Test
 import java.net.SocketTimeoutException

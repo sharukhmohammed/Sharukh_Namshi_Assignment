@@ -24,14 +24,14 @@ class ContextHelperTest {
     @Test
     fun stringResourceSameAsGivenString_returnsTrue() {
         assertThat(context).isNotNull()
-        assertThat(string(R.string.app_name, context)).isEqualTo("Sharukh x Namshi")
+        assertThat(string(R.string.test_string, context)).isEqualTo("Test String")
     }
 
 
     @Test
     fun stringResourceDifferentAsGivenString_returnsFalse() {
         assertThat(context).isNotNull()
-        assertThat(string(R.string.app_name, context)).isNotEqualTo("Some_thing_else")
+        assertThat(string(R.string.test_string, context)).isNotEqualTo("Some_thing_else")
     }
 
 

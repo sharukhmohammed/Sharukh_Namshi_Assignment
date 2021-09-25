@@ -12,7 +12,7 @@ import com.namshi.sharukh.modules.common.ActionListener
 import com.namshi.sharukh.modules.homeScreen.MainViewModel
 import com.namshi.sharukh.modules.productViewScreen.ViewProductFragment
 import com.namshi.sharukh.network.response.ApiResponse
-import com.namshi.sharukh.network.response.Carousel
+import com.namshi.sharukh.network.response.CarouselContent
 import com.namshi.sharukh.utils.onClick
 import com.namshi.sharukh.utils.showIf
 
@@ -71,7 +71,7 @@ class ProductGridFragment : BaseFragment(), ActionListener {
         activity?.addFragment(ViewProductFragment.newInstance(image.url))
     }
 
-    private fun setData(response: ApiResponse<Carousel>) {
+    private fun setData(response: ApiResponse<CarouselContent>) {
         val data = response.data
         binding.gridRefresh.isRefreshing = response.isLoading && data == null
         binding.errorLayout.showIf(response.exception != null && data == null)

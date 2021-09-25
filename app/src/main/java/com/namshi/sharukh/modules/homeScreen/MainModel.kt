@@ -1,7 +1,7 @@
 package com.namshi.sharukh.modules.homeScreen
 
 import com.namshi.sharukh.dataModels.NamshiWidget
-import com.namshi.sharukh.network.response.Carousel
+import com.namshi.sharukh.network.response.CarouselContent
 import com.namshi.sharukh.network.response.HomeContent
 import com.namshi.sharukh.utils.clearAndAddAll
 import io.reactivex.rxjava3.core.Observable
@@ -36,7 +36,7 @@ class MainModel {
 
     }
 
-    fun getProductList(): Observable<Carousel> {
+    fun getProductList(): Observable<CarouselContent> {
         return repo.getProductList()
     }
 

@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.namshi.sharukh.base.BaseFragment
-import com.namshi.sharukh.base.GlideApp
+import com.namshi.sharukh.misc.GlideApp
 import com.namshi.sharukh.databinding.FragmentViewProductBinding
 import com.namshi.sharukh.utils.onClick
 

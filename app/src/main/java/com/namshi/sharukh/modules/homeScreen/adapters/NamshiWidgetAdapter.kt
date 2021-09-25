@@ -50,8 +50,10 @@ class NamshiWidgetAdapter(private val fragment: BaseFragment, private val listen
                 ItemImageBinding.bind(holder.itemView).apply {
                     imageRecycler.apply {
                         setRecycledViewPool(imageViewPool)
-                        layoutManager = GridLayoutManager(context, widget.cols)
-                        adapter = ImageRowAdapter(listener).apply { setData(widget) }
+                        if (widget.cols > 0) {
+                            layoutManager = GridLayoutManager(context, widget.cols)
+                            adapter = ImageRowAdapter(listener).apply { setData(widget) }
+                        }
                     }
                 }
             }

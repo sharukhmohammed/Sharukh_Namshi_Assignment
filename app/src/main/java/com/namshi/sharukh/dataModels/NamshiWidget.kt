@@ -1,7 +1,7 @@
 package com.namshi.sharukh.dataModels
 
 import com.namshi.sharukh.utils.Constant
-import com.namshi.sharukh.utils.toPx
+import com.namshi.sharukh.utils.dpToPx
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -16,7 +16,7 @@ data class NamshiWidget(
 ) {
 
     val heightPx: Int
-        get() = height.toPx.toInt()
+        get() = height.dpToPx.toInt()
 
     @Serializable
     enum class Type : ViewType {

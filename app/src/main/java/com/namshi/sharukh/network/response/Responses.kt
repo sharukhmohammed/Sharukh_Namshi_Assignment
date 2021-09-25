@@ -23,4 +23,4 @@ data class HomeContent(val content: List<NamshiWidget> = listOf())
  * API 2, 3, 4 Response
 * */
 @Serializable
-data class Carousel(val images: List<Image> = listOf(), var url: String = Constant.EMPTY_STR)
+data class CarouselContent(val images: List<Image> = listOf(), var url: String = Constant.EMPTY_STR)
