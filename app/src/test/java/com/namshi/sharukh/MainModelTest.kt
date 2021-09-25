@@ -1,8 +1,8 @@
 package com.namshi.sharukh
 
 import com.google.common.truth.Truth.assertThat
-import com.namshi.sharukh.models.NamshiWidget
-import com.namshi.sharukh.modules.firstScreen.MainModel
+import com.namshi.sharukh.dataModels.NamshiWidget
+import com.namshi.sharukh.modules.homeScreen.MainModel
 import org.junit.Test
 
 class MainModelTest {

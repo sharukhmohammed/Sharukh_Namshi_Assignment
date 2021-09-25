@@ -6,7 +6,7 @@
     android:clickable="true"
     android:focusable="true"
     android:background="@color/black_transparent"
-    tools:context=".modules.ViewProductFragment">
+    tools:context=".modules.productViewScreen.ViewProductFragment">
 
     <ImageView
         android:id="@+id/product_image"

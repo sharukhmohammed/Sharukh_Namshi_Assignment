@@ -6,11 +6,9 @@ import android.graphics.drawable.Drawable
 import android.util.Log
 import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.annotation.GlideModule
-import com.bumptech.glide.load.DecodeFormat
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 import com.bumptech.glide.module.AppGlideModule
-import com.bumptech.glide.request.RequestOptions
 import timber.log.Timber
 
 /**
@@ -31,7 +29,8 @@ class HyperlinkedDebugTree : Timber.DebugTree() {
 @GlideModule
 class NamshiGlideModule : AppGlideModule() {
     override fun applyOptions(context: Context, builder: GlideBuilder) {
-        //Timber.d("applyOptions glide module $context")
+
+        //Use this to reduce RAM footprint
         //val memoryCacheSizeBytes = 1024 * 1024 * 30 // 30mb
 
         builder

@@ -5,18 +5,16 @@ import androidx.core.view.children
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import timber.log.Timber
 
 /**
  * Base recycler view adapter for easy access to common things like
- * 1. recycler view instance
- * 2. last item implementation
+ * 1. attached frag and recycler view instance
+ * 2. clear resources onStop
+ *
  *
  * Also optional connection to Lifecycle if fragment is provided.
- * Clients get access to clearHolders method which is invoked on lifecycle's onStart and onStop methods.
+ * Clients get access to clearHolders method which is invoked on lifecycles onStart and onStop methods.
  */
 
 
@@ -24,9 +22,7 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
 
     protected var rv: RecyclerView? = null
 
-    companion object {
-
-    }
+    companion object;
 
 
     init {
@@ -36,14 +32,12 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)
     open fun onStart() {
-        Timber.d("onStart")
         notifyDataSetChanged()
 
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)
     open fun onStop() {
-        Timber.d("onStop")
         rv?.children
             ?.mapIndexed { _, view -> rv?.getChildViewHolder(view) }
             ?.filterNotNull()
@@ -52,17 +46,14 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
 
     @OnLifecycleEvent(Lifecycle.Event.ON_PAUSE)
     open fun onPause() {
-        Timber.d("onPause")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
     open fun onResume() {
-        Timber.d("onResume")
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
     open fun onDestroy() {
-        Timber.d("onDestroy")
         fragment = null
         rv = null
     }
@@ -73,7 +64,6 @@ abstract class BaseAdapter<T : RecyclerView.ViewHolder?>(private var fragment: B
      * Helpful to release glide resources
      */
     open fun clearHolder(holder: T) {
-        Timber.d("clearHolder clearing $holder at position ${holder?.adapterPosition}")
     }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {

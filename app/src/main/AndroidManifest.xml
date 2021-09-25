@@ -15,8 +15,8 @@
         android:name=".base.App"
         android:theme="@style/Theme.SharukhXNamshi">
         <activity
-            android:name=".modules.firstScreen.MainActivity"
-            android:label="@string/title_activity_main"
+            android:name=".modules.homeScreen.MainActivity"
+            android:label="@string/app_name"
             android:theme="@style/Theme.SharukhXNamshi.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

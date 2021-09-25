@@ -1,13 +1,13 @@
 package com.namshi.sharukh.misc
 
 import android.content.Context
-import androidx.annotation.*
+import androidx.annotation.StringRes
 import com.namshi.sharukh.base.App
 
 
-/*
-Some utility functions which reduces lot of boilerplate from our codebase to access resources
- */
+/**
+ * String utility functions to access string res
+ * */
 fun string(@StringRes id: Int, context: Context? = null): String {
     return context?.resources?.getString(id) ?: App.instance.resources.getString(id)
 }

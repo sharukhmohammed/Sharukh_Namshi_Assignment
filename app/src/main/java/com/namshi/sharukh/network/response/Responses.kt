@@ -1,7 +1,7 @@
 package com.namshi.sharukh.network.response
 
-import com.namshi.sharukh.models.Image
-import com.namshi.sharukh.models.NamshiWidget
+import com.namshi.sharukh.dataModels.Image
+import com.namshi.sharukh.dataModels.NamshiWidget
 import com.namshi.sharukh.utils.Constant
 import kotlinx.serialization.Serializable
 

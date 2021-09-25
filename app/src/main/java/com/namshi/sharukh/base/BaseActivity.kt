@@ -48,8 +48,6 @@ abstract class BaseActivity : AppCompatActivity() {
 
         val transaction = fragmentManager.beginTransaction()
 
-
-
         if (replace) {
             transaction.replace(containerId, fragment, tag)
             transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)

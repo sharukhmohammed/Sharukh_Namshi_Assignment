@@ -111,29 +111,14 @@ abstract class BaseFragment : Fragment() {
 
     open fun showLoading() {
         handler.post {
-            val rootView = view
-            var loader: View? = rootView?.findViewById(R.id.common_loader_view)
-            if (loader == null) {
-                if (rootView is ViewGroup) {
-                    loader = LayoutInflater.from(requireContext()).inflate(R.layout.common_loader, rootView, false)
-                    rootView.addView(loader)
-                    loader.layoutParams.apply {
-                        height = ViewGroup.LayoutParams.MATCH_PARENT
-                        width = ViewGroup.LayoutParams.MATCH_PARENT
-                    }
-                } else
-                    Timber.e(IllegalStateException("Root layout must be a sub class of ViewGroup"))
-            }
-            loader?.show()
+
         }
     }
 
 
     open fun hideLoading() {
         handler.post {
-            val rootView = view
-            val progress = rootView?.findViewById<View>(R.id.common_loader_view)
-            progress?.gone()
+
         }
     }
 
