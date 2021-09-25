@@ -11,8 +11,9 @@ import java.util.concurrent.TimeUnit
 abstract class MainRepoAbs {
 
     companion object {
+        private const val TIMEOUT = 3L
         fun <T> Observable<T>.applyTimeout(): Observable<T> {
-            return this.timeout(MainRepo.TIMEOUT, TimeUnit.SECONDS)
+            return this.timeout(TIMEOUT, TimeUnit.SECONDS)
         }
     }
 

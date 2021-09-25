@@ -7,7 +7,6 @@ import kotlinx.serialization.SerializationException
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.Mockito.mock
 
 
 class MainViewModelTest {
@@ -63,7 +62,7 @@ class MainViewModelTest {
 
     @Test
     fun productDataFetch_returnsTrue() {
-        viewModel.refreshMainScreen()
+        viewModel.refreshProductScreen()
         Thread.sleep(3000)
         val response = viewModel.productListLiveData.value
         assertThat(response?.data).isNotNull()
@@ -71,7 +70,7 @@ class MainViewModelTest {
 
     @Test
     fun productDataFetchErrorCheck_returnsTrue() {
-        viewModel.refreshMainScreen()
+        viewModel.refreshProductScreen()
         val response = viewModel.productListLiveData.value
         response?.exception = SerializationException("JSON parse failed")
         assertThat(response?.exception).isNotNull()
@@ -79,14 +78,14 @@ class MainViewModelTest {
 
     @Test
     fun productDataFetchStartsLoading_returnsTrue() {
-        viewModel.refreshMainScreen()
+        viewModel.refreshProductScreen()
         val response = viewModel.productListLiveData.value
         assertThat(response?.isLoading).isTrue()
     }
 
     @Test
     fun productDataFetchInitialDataIsNull_returnsTrue() {
-        viewModel.refreshMainScreen()
+        viewModel.refreshProductScreen()
         val response = viewModel.productListLiveData.value
         assertThat(response?.data).isNull()
     }
